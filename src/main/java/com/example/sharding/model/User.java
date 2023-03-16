@@ -1,5 +1,6 @@
 package com.example.sharding.model;
 
+import com.example.sharding.model.enums.City;
 import com.example.sharding.model.enums.UserStatus;
 import lombok.*;
 
@@ -15,7 +16,7 @@ public class User {
 
     private String login;
 
-    private String city;
+    private City city;
 
     private UserStatus status;
 }
