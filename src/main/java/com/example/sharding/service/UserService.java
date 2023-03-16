@@ -1,19 +1,19 @@
 package com.example.sharding.service;
 
 import com.example.sharding.model.User;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.sharding.model.enums.City;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getAll();
+    List<User> getAll(City city);
 
-    void get(Long id);
+    User get(Long id, City city);
 
-    void delete(Long id);
+    User create(User user);
 
-    void update(@RequestBody User user);
+    User update(User user);
 
-    void create(@RequestBody User user);
+    void delete(Long id, City city);
 }

@@ -1,19 +1,19 @@
 package com.example.sharding.service;
 
 import com.example.sharding.model.Order;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.sharding.model.enums.City;
 
 import java.util.List;
 
 public interface OrderService {
 
-    List<Order> getAll();
+    List<Order> getAll(City city);
 
-    void get(Long id);
+    Order get(Long id, City city);
 
-    void delete(Long id);
+    Order create(Order order, City city);
 
-    void update(@RequestBody Order order);
+    Order update(Order order, City city);
 
-    void create(@RequestBody Order order);
+    void delete(Long id, City city);
 }

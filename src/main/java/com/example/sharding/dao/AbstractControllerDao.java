@@ -10,10 +10,14 @@ public abstract class AbstractControllerDao<E, K> {
     private final DbConnectionManager dbConnectionManager;
 
     public abstract List<E> getAll();
+
+    public abstract E get(K id);
+
+    public abstract boolean create(E entity);
+
     public abstract E update(E entity);
-    public abstract E getEntityById(K id);
+
     public abstract boolean delete(K id);
-    public abstract boolean create(E entity) throws SQLException;
 
     public AbstractControllerDao(DbConnectionManager dbConnectionManager){
         this.dbConnectionManager = dbConnectionManager;
