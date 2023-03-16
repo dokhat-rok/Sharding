@@ -23,8 +23,8 @@ public class UserRepository extends AbstractControllerDao<User, Long> {
     }
 
     @Override
-    public boolean create(User entity) {
-        return false;
+    public User create(User entity) {
+        return null;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserRepository extends AbstractControllerDao<User, Long> {
     }
 
     @Override
-    public boolean delete(Long id) {
-        return false;
+    public void delete(Long id) {
+
     }
 }

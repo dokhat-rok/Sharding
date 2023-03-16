@@ -9,15 +9,15 @@ import java.util.List;
 public abstract class AbstractControllerDao<E, K> {
     private final DbConnectionManager dbConnectionManager;
 
-    public abstract List<E> getAll();
+    public abstract List<E> getAll() throws SQLException;
 
-    public abstract E get(K id);
+    public abstract E get(K id) throws SQLException;
 
-    public abstract boolean create(E entity);
+    public abstract E create(E entity) throws SQLException;
 
-    public abstract E update(E entity);
+    public abstract E update(E entity) throws SQLException;
 
-    public abstract boolean delete(K id);
+    public abstract void delete(K id) throws SQLException;
 
     public AbstractControllerDao(DbConnectionManager dbConnectionManager){
         this.dbConnectionManager = dbConnectionManager;
