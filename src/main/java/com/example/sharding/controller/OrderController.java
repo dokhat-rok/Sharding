@@ -27,19 +27,19 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<Order> get(@RequestParam Long id, @RequestParam City city) {
+    public ResponseEntity<Void> get(@RequestParam Long id, @RequestParam City city) {
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public ResponseEntity<Order> create(@RequestBody Order order, @RequestParam City city) {
+    public ResponseEntity<Void> create(@RequestBody Order order, @RequestParam City city) {
 
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Order> update(@RequestBody Order order, @RequestParam City city) {
+    public ResponseEntity<Void> update(@RequestBody Order order, @RequestParam City city) {
 
         return ResponseEntity.ok().build();
     }

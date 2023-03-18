@@ -27,19 +27,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<User> get(@RequestParam Long id, @RequestParam City city) {
+    public ResponseEntity<Void> get(@RequestParam Long id, @RequestParam City city) {
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user) {
+    public ResponseEntity<Void> create(@RequestBody User user) {
 
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody User user) {
+    public ResponseEntity<Void> update(@RequestBody User user) {
 
         return ResponseEntity.ok().build();
     }
