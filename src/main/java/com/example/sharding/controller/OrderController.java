@@ -22,31 +22,36 @@ public class OrderController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Order>> getAll(@RequestParam City city) {
-
-        return ResponseEntity.ok(List.of());
+        List<Order> orders = orderService.getAll(city);
+        log.info("Get all orders by city:{}",city);
+        return ResponseEntity.ok(orders);
     }
 
     @GetMapping
-    public ResponseEntity<Void> get(@RequestParam Long id, @RequestParam City city) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Order> get(@RequestParam Long id, @RequestParam City city) {
+        Order order = orderService.get(id,city);
+        log.info("Get order with id: {} by city: {}",id,city);
+        return ResponseEntity.ok(order);
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Order order, @RequestParam City city) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Order> create(@RequestBody Order order, @RequestParam City city) {
+        Order orderNew = orderService.create(order, city);
+        log.info("Create new order: {} by city:{}",orderNew,city);
+        return ResponseEntity.ok(orderNew);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody Order order, @RequestParam City city) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Order> update(@RequestBody Order order, @RequestParam City city) {
+        Order orderUpdate = orderService.update(order,city);
+        log.info("Update order: {} by city:{}",orderUpdate,city);
+        return ResponseEntity.ok(orderUpdate);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestParam Long id, @RequestParam City city) {
-
+        orderService.delete(id,city);
+        log.info("Delete order with id: {} by city:{}",id,city);
         return ResponseEntity.ok().build();
     }
 }

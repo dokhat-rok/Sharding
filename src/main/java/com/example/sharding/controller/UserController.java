@@ -22,31 +22,36 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAll(@RequestParam City city) {
-
-        return ResponseEntity.ok(List.of());
+        List<User> users = userService.getAll(city);
+        log.info("Get all users by city {}: {}",city.name(),users);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping
-    public ResponseEntity<Void> get(@RequestParam Long id, @RequestParam City city) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> get(@RequestParam Long id, @RequestParam City city) {
+        User user = userService.get(id,city);
+        log.info("Get user by city {}: {}",city.name(),user);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody User user) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> create(@RequestBody User user) {
+        User userNew = userService.create(user);
+        log.info("Create user: {}",userNew);
+        return ResponseEntity.ok(userNew);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody User user) {
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> update(@RequestBody User user) {
+        User userUpdate = userService.update(user);
+        log.info("Update user: {}",userUpdate);
+        return ResponseEntity.ok(userUpdate);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestParam Long id, @RequestParam City city) {
-
+         userService.delete(id, city);
+        log.info("Delete user with id: {} from city: {}",id,city);
         return ResponseEntity.ok().build();
     }
 }
