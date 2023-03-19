@@ -63,11 +63,13 @@ public class UserRepository extends AbstractControllerDao<User, Long> {
     @Override
     public User create(User entity) {
         try {
-            super.getPrepareStatement("insert into public.user(login, city, status values "
-                            + "(" + entity.getLogin() + ", " + entity.getCity() + ", " + entity.getStatus() + ");")
-                    .executeQuery();
-            Long last = super.getPrepareStatement("select max(id) from public.user;")
-                    .executeQuery().getLong(1);
+            String query = "insert into public.user(login, city, status) values "
+                    + "('" + entity.getLogin() + "', '" + entity.getCity() + "', '" + entity.getStatus() + "');";
+            super.getPrepareStatement(query)
+                    .executeUpdate();
+            ResultSet resultSet = super.getPrepareStatement("select max(id) from public.user;").executeQuery();
+            resultSet.next();
+            Long last = resultSet.getLong("max");
             return this.get(last);
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
@@ -77,8 +79,9 @@ public class UserRepository extends AbstractControllerDao<User, Long> {
     @Override
     public User update(User entity) {
         try {
-            super.getPrepareStatement("update public.user set login = " + entity.getLogin()
-                    + ", city = " + entity.getCity() + ", status = " + entity.getStatus() + ";").executeQuery();
+            super.getPrepareStatement("update public.user set login = '" + entity.getLogin()
+                    + "', city = '" + entity.getCity() + "', status = '" + entity.getStatus() + "'" +
+                    "where id = " + entity.getId() + ";").executeUpdate();
             return this.get(entity.getId());
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
@@ -88,7 +91,7 @@ public class UserRepository extends AbstractControllerDao<User, Long> {
     @Override
     public void delete(Long id) {
         try {
-            super.getPrepareStatement("delete from public.user where id = " + id + ";").executeQuery();
+            super.getPrepareStatement("delete from public.user where id = " + id + ";").executeUpdate();
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
         }

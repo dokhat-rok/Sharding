@@ -64,11 +64,13 @@ public class OrderRepository extends AbstractControllerDao<Order, Long> {
     @Override
     public Order create(Order entity) {
         try {
-            super.getPrepareStatement("insert into public.order(user_id, product, count values "
-                            + "(" + entity.getUser().getId() + ", " + entity.getProduct() + ", " + entity.getCount() + ");")
-                    .executeQuery();
-            Long last = super.getPrepareStatement("select max(id) from public.order;")
-                    .executeQuery().getLong(1);
+            super.getPrepareStatement("insert into public.order(user_id, product, count) values "
+                            + "('" + entity.getUser().getId() + "', '" + entity.getProduct()
+                            + "', '" + entity.getCount() + "');")
+                    .executeUpdate();
+            ResultSet resultSet = super.getPrepareStatement("select max(id) from public.order;").executeQuery();
+            resultSet.next();
+            Long last = resultSet.getLong("max");
             return this.get(last);
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
@@ -78,8 +80,10 @@ public class OrderRepository extends AbstractControllerDao<Order, Long> {
     @Override
     public Order update(Order entity) {
         try {
-            super.getPrepareStatement("update public.order set user_id = " + entity.getUser().getId()
-                    + ", product = " + entity.getProduct() + ", count = " + entity.getCount() + ";").executeQuery();
+            super.getPrepareStatement("update public.order set user_id = '" + entity.getUser().getId()
+                    + "', product = '" + entity.getProduct() + "', count = '" + entity.getCount() + "'" +
+                            "where id = " + entity.getId() + ";")
+                    .executeUpdate();
             return this.get(entity.getId());
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
@@ -89,7 +93,7 @@ public class OrderRepository extends AbstractControllerDao<Order, Long> {
     @Override
     public void delete(Long id) {
         try {
-            super.getPrepareStatement("delete from public.order where id = " + id + ";").executeQuery();
+            super.getPrepareStatement("delete from public.order where id = " + id + ";").executeUpdate();
         } catch (SQLException ex) {
             throw new DataSourceException(ex.getMessage());
         }
