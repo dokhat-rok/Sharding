@@ -39,8 +39,9 @@ public class RostovDataSourceConfig {
     }
 
     @Bean
-    public OrderRepository rostovOrderRepository(DbConnectionManager rostovDbConnectionManager){
-        return new OrderRepository(rostovDbConnectionManager);
+    public OrderRepository rostovOrderRepository(DbConnectionManager rostovDbConnectionManager,
+                                                 UserRepository rostovUserRepository){
+        return new OrderRepository(rostovDbConnectionManager, rostovUserRepository);
     }
 
     @Bean

@@ -39,8 +39,9 @@ public class BiyskDataSourceConfig {
     }
 
     @Bean
-    public OrderRepository biyskOrderRepository(DbConnectionManager biyskDbConnectionManager) {
-        return new OrderRepository(biyskDbConnectionManager);
+    public OrderRepository biyskOrderRepository(DbConnectionManager biyskDbConnectionManager,
+                                                UserRepository biyskUserRepository) {
+        return new OrderRepository(biyskDbConnectionManager, biyskUserRepository);
     }
 
     @Bean

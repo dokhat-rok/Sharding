@@ -39,8 +39,9 @@ public class MoscowDataSourceConfig {
     }
 
     @Bean
-    public OrderRepository moscowOrderRepository(DbConnectionManager moscowDbConnectionManager){
-        return new OrderRepository(moscowDbConnectionManager);
+    public OrderRepository moscowOrderRepository(DbConnectionManager moscowDbConnectionManager,
+                                                 UserRepository moscowUserRepository){
+        return new OrderRepository(moscowDbConnectionManager, moscowUserRepository);
     }
 
     @Bean
